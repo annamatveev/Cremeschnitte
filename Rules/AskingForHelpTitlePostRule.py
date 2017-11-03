@@ -1,6 +1,7 @@
 from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
 from Models.RuleMatch import RuleMatch
 from Models.Post import Post
+from Config.QualityThersholds import QualityThresholds
 
 
 class AskingForHelpTitlePostRule:
@@ -15,7 +16,7 @@ class AskingForHelpTitlePostRule:
 
         if len(good_words_found) > 0 and len(bad_words_found) > 0:
             match = RuleMatch(AskingForHelpTitlePostRule.description + ': ' + ', '.join(good_words_found),
-                              AskingForHelpTitlePostRule.calculate_score(reddit_post))
+                              QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
             golden_post = Post(reddit_post.selftext,
                                reddit_post.title,
                                reddit_post.ups,
@@ -25,7 +26,3 @@ class AskingForHelpTitlePostRule:
                                match,
                                reddit_post)
             return golden_post
-
-    @staticmethod
-    def calculate_score(reddit_post):
-        return reddit_post.ups

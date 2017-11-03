@@ -41,3 +41,7 @@ class QualityThresholds:
     def is_above_average_comment(comment):
         return comment.ups > QualityThresholds.average_comment_upvotes \
                and len(comment.body) > QualityThresholds.average_comment_body_length
+
+    @staticmethod
+    def content_quality_score(content, upvotes):
+        return len(content) / 100 + upvotes

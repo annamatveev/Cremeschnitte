@@ -12,7 +12,7 @@ class CommentToIndicativeWordsInTitleRule:
         if isinstance(reddit_comment, praw.models.Comment) \
                 and QualityThresholds.is_high_rated_comment(reddit_comment):
             match = RuleMatch("Highly voted comment for post with indicative words in title",
-                              CommentToIndicativeWordsInTitleRule.calculate_score(reddit_comment))
+                              QualityThresholds.content_quality_score(reddit_comment.body, reddit_comment.ups))
             golden_comment = Comment(reddit_comment.body,
                                      reddit_comment.submission.title,
                                      reddit_comment.ups,
@@ -23,7 +23,3 @@ class CommentToIndicativeWordsInTitleRule:
                                      match,
                                      reddit_comment)
             return golden_comment
-
-    @staticmethod
-    def calculate_score(reddit_post):
-        return reddit_post.ups

@@ -1,8 +1,7 @@
 from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
 from Config.QualityThersholds import QualityThresholds
-from Models.Post import Post
 from Models.RuleMatch import RuleMatch
-
+from Models.Post import Post
 
 class ContentPublishingTitlePostRule:
     description = "Indicative words for content publishing in title"
@@ -17,7 +16,7 @@ class ContentPublishingTitlePostRule:
         if len(content_words_found) > 0 and len(advice_words_found) == 0 \
                 and QualityThresholds.is_above_average_post(reddit_post):
             match = RuleMatch(ContentPublishingTitlePostRule.description + ': ' + ', '.join(content_words_found),
-                              ContentPublishingTitlePostRule.calculate_score(reddit_post))
+                              QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
             golden_post = Post(reddit_post.selftext,
                                reddit_post.title,
                                reddit_post.ups,
@@ -27,7 +26,3 @@ class ContentPublishingTitlePostRule:
                                match,
                                reddit_post)
             return golden_post
-
-    @staticmethod
-    def calculate_score(reddit_post):
-        return reddit_post.ups

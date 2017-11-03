@@ -1,9 +1,8 @@
+from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
 from Rules.HighlyRatedPostRule import HighlyRatedPostRule
 from Filters.ContentFilter import ContentFilter
 from Config.PrawConfig import PrawConfig
 import copy
-
-from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
 
 
 class PostsFilter(ContentFilter):

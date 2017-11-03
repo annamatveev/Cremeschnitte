@@ -28,7 +28,7 @@ for golden_comment in comment_filter.golden_content:
         golden_content.append(golden_comment)
 
 for golden_post in posts_filter.golden_content:
-    if any(content.user.fullname == golden_post.user.fullname for content in
+    if any(content.user.fullname == golden_post.user.name for content in
            golden_content) is not None: # User exists in other content
         golden_user = users_filter.find_user_info(golden_post.user, subreddit)
         golden_post.user = golden_user

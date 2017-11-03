@@ -9,7 +9,8 @@ class HighlyRatedPostRule:
     @staticmethod
     def execute_rule(reddit_post):
         if QualityThresholds.is_above_average_post(reddit_post):
-            match = RuleMatch(HighlyRatedPostRule.description, HighlyRatedPostRule.calculate_score(reddit_post))
+            match = RuleMatch(HighlyRatedPostRule.description,
+                              QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
             golden_post = Post(reddit_post.selftext,
                                reddit_post.title,
                                reddit_post.ups,
@@ -20,7 +21,3 @@ class HighlyRatedPostRule:
                                reddit_post)
 
             return golden_post
-
-    @staticmethod
-    def calculate_score(reddit_post):
-        return len(reddit_post.selftext) / 100 + reddit_post.ups
