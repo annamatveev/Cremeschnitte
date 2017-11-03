@@ -11,7 +11,7 @@ import copy
 class CommentFilter(ContentFilter):
 
     def __init__(self, subreddit):
-        self.comments = subreddit.comments(limit=500)
+        self.comments = subreddit.comments(limit=PrawConfig.COMMENT_LIMIT)
         super(CommentFilter, self).__init__(subreddit)
 
     def filter_golden_comments(self):
@@ -20,7 +20,7 @@ class CommentFilter(ContentFilter):
         print(len(self.golden_content))
 
     def filter_comments_to_indicative_words_post(self):
-        golden_post_with_indicative_words = self.apply_rules(self.subreddit.new(limit=200), [AskingForHelpTitlePostRule])
+        golden_post_with_indicative_words = self.apply_rules(self.subreddit.new(limit=PrawConfig.POST_LIMIT), [AskingForHelpTitlePostRule])
         if golden_post_with_indicative_words is not None:
             self.apply_rules(golden_post_with_indicative_words.reddit_content.comments,
                              [CommentToIndicativeWordsInTitleRule])

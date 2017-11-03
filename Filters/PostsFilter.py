@@ -1,5 +1,6 @@
 from Rules.HighlyRatedPostRule import HighlyRatedPostRule
 from Filters.ContentFilter import ContentFilter
+from Config.PrawConfig import PrawConfig
 import copy
 
 from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
@@ -8,7 +9,7 @@ from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
 class PostsFilter(ContentFilter):
 
     def __init__(self, subreddit):
-        self.posts = subreddit.new(limit=50)
+        self.posts = subreddit.new(limit=PrawConfig.POST_LIMIT)
         super(PostsFilter, self).__init__(subreddit)
 
     def filter_golden_posts(self):
