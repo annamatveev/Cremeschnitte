@@ -1,7 +1,6 @@
 from Comment import Comment
 import praw
 from RuleMatch import RuleMatch
-from IndicativeWordsDictionary import IndicativeWordsDictionary
 
 
 class CommentToIndicativeWordsInTitleRule:

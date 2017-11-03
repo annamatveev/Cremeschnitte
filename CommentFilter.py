@@ -7,7 +7,7 @@ from SpamContentInCommentRule import SpanContentInCommentRule
 
 class CommentFilter:
     def __init__(self, subreddit):
-        self.comments = subreddit.comments(limit=50)
+        self.comments = subreddit.comments(limit=10)
         self.subreddit = subreddit;
         self.golden_comments = []
 

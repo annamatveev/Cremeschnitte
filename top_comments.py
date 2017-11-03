@@ -18,8 +18,13 @@ posts_filter = PostsFilter(subreddit)
 users_filter = UsersFilter()
 writer = CSVWriter()
 
-for golden_post in posts_filter.golden_posts:
-    golden_user = users_filter.find_user_info(golden_post.user)
-    golden_post.user = golden_user
+# for golden_post in posts_filter.golden_posts:
+#    golden_user = users_filter.find_user_info(golden_post.user)
+#    golden_post.user = golden_user
+# writer.write_row(posts_filter.golden_posts)
+
+for golden_comment in comment_filter.golden_comments:
+    golden_user = users_filter.find_user_info(golden_comment.user)
+    golden_comment.user = golden_user
 
 writer.write_row(posts_filter.golden_posts)
