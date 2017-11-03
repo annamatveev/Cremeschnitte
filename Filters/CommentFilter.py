@@ -17,7 +17,6 @@ class CommentFilter(ContentFilter):
     def filter_golden_comments(self):
         self.modify_content_by_rules(copy.copy(self.comments), [LongCommentRule, HighlyRatedCommentRule])
         self.filter_comments_to_indicative_words_post()
-        var = []
 
     def filter_comments_to_indicative_words_post(self):
         golden_post_with_indicative_words = self.find_content_by_rules(self.subreddit.new(limit=PrawConfig.POST_LIMIT),

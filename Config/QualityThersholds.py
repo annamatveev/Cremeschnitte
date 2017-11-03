@@ -39,7 +39,6 @@ class QualityThresholds:
 
     @staticmethod
     def is_above_average_comment(comment):
-        var = []
         return comment.ups > QualityThresholds.average_comment_upvotes \
                and len(comment.body) > QualityThresholds.average_comment_body_length
 
