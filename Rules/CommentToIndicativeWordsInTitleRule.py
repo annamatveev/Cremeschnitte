@@ -10,7 +10,8 @@ class CommentToIndicativeWordsInTitleRule:
     @staticmethod
     def execute_rule(reddit_comment):
         if isinstance(reddit_comment, praw.models.Comment) \
-                and QualityThresholds.is_high_rated_comment(reddit_comment):
+                and (QualityThresholds.is_high_rated_comment(reddit_comment)
+                     or QualityThresholds.is_long_comment(reddit_comment)):
             match = RuleMatch("Highly voted comment for post with indicative words in title",
                               QualityThresholds.content_quality_score(reddit_comment.body, reddit_comment.ups))
             golden_comment = Comment(reddit_comment.body,

@@ -1,7 +1,7 @@
 class QualityThresholds:
 
     # Comments
-    average_comment_upvotes = 5
+    average_comment_upvotes = 2
     average_comment_body_length = 300
     high_rated_comment_upvotes = 20
     long_comment_body_length = 500
@@ -39,6 +39,7 @@ class QualityThresholds:
 
     @staticmethod
     def is_above_average_comment(comment):
+        var = []
         return comment.ups > QualityThresholds.average_comment_upvotes \
                and len(comment.body) > QualityThresholds.average_comment_body_length
 

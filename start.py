@@ -3,12 +3,15 @@ from CSVWriter import CSVWriter
 from Filters.PostsFilter import PostsFilter
 from Filters.UsersFilter import UsersFilter
 from Filters.CommentFilter import CommentFilter
+from Config.PrawConfig import PrawConfig
 
-r = praw.Reddit(client_id='', client_secret='',
-                     password='', user_agent='',
-                     username='')
+r = praw.Reddit(client_id=PrawConfig.client_id,
+                client_secret=PrawConfig.client_secret,
+                password=PrawConfig.password,
+                user_agent=PrawConfig.user_agent,
+                username=PrawConfig.username)
 
-subreddit = r.subreddit('OverwatchUniversity')
+subreddit = r.subreddit(PrawConfig.SUBREDDIT)
 
 comment_filter = CommentFilter(subreddit)
 comment_filter.filter_golden_comments()

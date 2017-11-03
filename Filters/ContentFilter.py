@@ -13,4 +13,5 @@ class ContentFilter:
         return golden_contents
 
     def modify_content_by_rules(self, contents, rules_list):
-        self.golden_content = self.find_content_by_rules(contents, rules_list)
+        golden_content = self.find_content_by_rules(contents, rules_list)
+        self.golden_content += golden_content

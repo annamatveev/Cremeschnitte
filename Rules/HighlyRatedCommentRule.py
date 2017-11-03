@@ -12,7 +12,7 @@ class HighlyRatedCommentRule:
         if isinstance(reddit_comment, praw.models.Comment) \
                 and QualityThresholds.is_high_rated_comment(reddit_comment):
             match = RuleMatch(HighlyRatedCommentRule.description,
-                              QualityThresholds.content_quality_score(reddit_comment.selftext, reddit_comment.ups))
+                              QualityThresholds.content_quality_score(reddit_comment.body, reddit_comment.ups))
             golden_comment = Comment(reddit_comment.body,
                                      reddit_comment.submission.title,
                                      reddit_comment.ups,

@@ -11,7 +11,3 @@ class SpanContentInCommentRule:
                 return None
             else:
                 return reddit_comment
-
-    @staticmethod
-    def calculate_score(reddit_post):
-        return reddit_post.ups
