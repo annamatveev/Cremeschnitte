@@ -24,8 +24,8 @@ writer = CSVWriter()
 # writer.write_row(posts_filter.golden_posts)
 
 for golden_comment in comment_filter.golden_comments:
-    golden_user = users_filter.find_user_info(golden_comment.user)
+    golden_user = users_filter.find_user_info(golden_comment.user, subreddit)
     golden_comment.user = golden_user
 
-writer.write_row(posts_filter.golden_posts)
+writer.write_row(comment_filter.golden_comments)
 
