@@ -40,7 +40,7 @@ class CommentFilter:
             if golden_post_with_indicative_words is not None:
                 for reddit_comment in golden_post_with_indicative_words.reddit_content.comments:
                     golden_comment = CommentToIndicativeWordsInTitleRule.execute_rule(reddit_comment)
-                    if golden_comment is not None:
+                    if golden_comment is not None and self.golden_comments.index(reddit_comment) == 0:
                         self.golden_comments.append(golden_comment)
 
     def remove_spam_messages(self):
