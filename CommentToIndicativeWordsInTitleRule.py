@@ -15,8 +15,11 @@ class CommentToIndicativeWordsInTitleRule:
                 and reddit_comment.score > CommentToIndicativeWordsInTitleRule.upvotes_threshold \
                 and len(reddit_comment.body) > CommentToIndicativeWordsInTitleRule.comment_body_length_threshold:
             match = RuleMatch("Highly voted comment for post with indicative words in title", CommentToIndicativeWordsInTitleRule.calculate_score(reddit_comment))
-            golden_comment = Comment(reddit_comment.body, reddit_comment.submission.title, reddit_comment.ups,
-                                     reddit_comment.permalink, reddit_comment.submission.shortlink,
+            golden_comment = Comment(reddit_comment.body,
+                                     reddit_comment.submission.title,
+                                     reddit_comment.ups,
+                                     reddit_comment.permalink,
+                                     reddit_comment.submission.shortlink,
                                      reddit_comment.author,
                                      reddit_comment.created,
                                      match,
