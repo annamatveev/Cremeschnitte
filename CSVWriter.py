@@ -19,8 +19,7 @@ class CSVWriter:
                           'Karma',
                           'Comments in subreddit',
                           'Posts in subreddit',
-                          'Date Created (Unix Timestamp)'
-                          ]
+                          'Date Created (Unix Timestamp)']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
             writer.writeheader()
