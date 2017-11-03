@@ -1,4 +1,4 @@
-from Content import Content
+from Models.Content import Content
 
 
 class Comment(Content):

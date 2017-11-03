@@ -1,7 +1,8 @@
-from Comment import Comment
 import praw
-from RuleMatch import RuleMatch
-from QualityThersholds import QualityThresholds
+
+from Config.QualityThersholds import QualityThresholds
+from Models.Comment import Comment
+from Models.RuleMatch import RuleMatch
 
 
 class LongCommentRule:

@@ -1,4 +1,4 @@
-from IndicativeWordsDictionary import IndicativeWordsDictionary
+from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
 
 
 class SpanContentInCommentRule:

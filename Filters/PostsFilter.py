@@ -1,6 +1,7 @@
+from Rules.HighlyRatedPostRule import HighlyRatedPostRule
 import copy
-from HighlyRatedPostRule import HighlyRatedPostRule
-from ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
+
+from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
 
 
 class PostsFilter:

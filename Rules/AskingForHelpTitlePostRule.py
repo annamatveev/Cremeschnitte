@@ -1,6 +1,6 @@
-from Post import Post
-from RuleMatch import RuleMatch
-from IndicativeWordsDictionary import IndicativeWordsDictionary
+from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
+from Models.RuleMatch import RuleMatch
+from Models.Post import Post
 
 
 class AskingForHelpTitlePostRule:

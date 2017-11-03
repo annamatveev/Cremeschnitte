@@ -1,6 +1,8 @@
 import csv
 import datetime
-from PrawConfig import PrawConfig
+
+from Config.PrawConfig import PrawConfig
+
 
 class CSVWriter:
 

@@ -1,7 +1,8 @@
-from Post import Post
-from RuleMatch import RuleMatch
-from IndicativeWordsDictionary import IndicativeWordsDictionary
-from QualityThersholds import QualityThresholds
+from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
+from Config.QualityThersholds import QualityThresholds
+from Models.Post import Post
+from Models.RuleMatch import RuleMatch
+
 
 class ContentPublishingTitlePostRule:
     description = "Indicative words for content publishing in title"

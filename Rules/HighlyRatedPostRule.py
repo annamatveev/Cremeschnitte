@@ -1,6 +1,6 @@
-from Post import Post
-from RuleMatch import RuleMatch
-from QualityThersholds import QualityThresholds
+from Config.QualityThersholds import QualityThresholds
+from Models.RuleMatch import RuleMatch
+from Models.Post import Post
 
 
 class HighlyRatedPostRule:

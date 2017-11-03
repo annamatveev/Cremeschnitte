@@ -1,13 +1,14 @@
+from Models.User import User
 import praw
-import time
-from User import User
+
 
 class UsersFilter:
 
     def __init__(self):
         self.golden_users = []
 
-    def find_user_info(self, reddit_user, relevant_subreddit):
+    @staticmethod
+    def find_user_info(reddit_user, relevant_subreddit):
         comments_counter = 0
         posts_counter = 0
 

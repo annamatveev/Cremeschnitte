@@ -1,10 +1,11 @@
+from Rules.AskingForHelpTitlePostRule import AskingForHelpTitlePostRule
+from Rules.SpamContentInCommentRule import SpanContentInCommentRule
+from Rules.HighlyRatedCommentRule import HighlyRatedCommentRule
+from Rules.LongCommentRule import LongCommentRule
 import copy
-from HighlyRatedCommentRule import HighlyRatedCommentRule
-from LongCommentRule import LongCommentRule
-from AskingForHelpTitlePostRule import AskingForHelpTitlePostRule
-from CommentToIndicativeWordsInTitleRule import CommentToIndicativeWordsInTitleRule
-from SpamContentInCommentRule import SpanContentInCommentRule
-from PrawConfig import PrawConfig
+
+from Config.PrawConfig import PrawConfig
+from Rules.CommentToIndicativeWordsInTitleRule import CommentToIndicativeWordsInTitleRule
 
 
 class CommentFilter:

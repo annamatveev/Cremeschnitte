@@ -1,8 +1,8 @@
 import praw
-from CommentFilter import CommentFilter
-from PostsFilter import PostsFilter
-from UsersFilter import UsersFilter
 from CSVWriter import CSVWriter
+from Filters.PostsFilter import PostsFilter
+from Filters.UsersFilter import UsersFilter
+from Filters.CommentFilter import CommentFilter
 
 r = praw.Reddit(client_id='', client_secret='',
                      password='', user_agent='',
