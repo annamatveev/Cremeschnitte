@@ -23,21 +23,18 @@ class CommentFilter:
         print(len(self.golden_comments))
 
     def filter_long_comments(self):
-        print("long comments")
         for reddit_comment in copy.copy(self.comments):
             golden_comment = LongCommentRule.execute_rule(reddit_comment)
-            if golden_comment is not None:
+            if golden_comment is not None and self.golden_comments.index(reddit_comment) == 0:
                 self.golden_comments.append(golden_comment)
 
     def filter_high_rated_comments(self):
-        print("high rated")
         for reddit_comment in copy.copy(self.comments):
             golden_comment = HighlyRatedCommentRule.execute_rule(reddit_comment)
-            if golden_comment is not None:
+            if golden_comment is not None and self.golden_comments.index(reddit_comment) == 0:
                 self.golden_comments.append(golden_comment)
 
     def filter_comments_to_indicative_words_post(self):
-        print("indicative words")
         for reddit_post in copy.copy(self.subreddit.new(limit=200)):
             golden_post_with_indicative_words = AskingForHelpTitlePostRule.execute_rule(reddit_post)
             if golden_post_with_indicative_words is not None:

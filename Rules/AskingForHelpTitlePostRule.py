@@ -5,8 +5,6 @@ from Models.Post import Post
 
 class AskingForHelpTitlePostRule:
     description = "Indicative words in title that ask for help"
-    upvotes_threshold = 5
-    post_body_length_threshold = 1000
 
     @staticmethod
     def execute_rule(reddit_post):
