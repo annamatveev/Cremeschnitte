@@ -17,13 +17,13 @@ class PostsFilter:
     def find_high_rated_posts(self):
         for reddit_post in copy.copy(self.posts):
             golden_post = HighlyRatedPostRule.execute_rule(reddit_post)
-            if golden_post is not None and self.golden_posts.index(reddit_post) == 0:
+            if golden_post is not None and self.golden_posts.count(reddit_post) == 0:
                 self.golden_posts.append(golden_post)
 
     def find_indicative_words_in_post(self):
         for reddit_post in copy.copy(self.posts):
             golden_post = ContentPublishingTitlePostRule.execute_rule(reddit_post)
-            if golden_post is not None and self.golden_posts.index(reddit_post) == 0:
+            if golden_post is not None and self.golden_posts.count(reddit_post) == 0:
                 self.golden_posts.append(golden_post)
 
     def print_golden_posts(self):
