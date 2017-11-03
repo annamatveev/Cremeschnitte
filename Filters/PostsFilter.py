@@ -12,9 +12,4 @@ class PostsFilter(ContentFilter):
         super(PostsFilter, self).__init__(subreddit)
 
     def filter_golden_posts(self):
-        self.apply_rules(copy.copy(self.posts), [HighlyRatedPostRule, ContentPublishingTitlePostRule])
-
-
-    def print_golden_posts(self):
-        for post in self.golden_content:
-            print(post.thread_link + " \t " + str(post.votes) + " \t " + post.rule + " \t " + post.title)
+        self.modify_content_by_rules(copy.copy(self.posts), [HighlyRatedPostRule, ContentPublishingTitlePostRule])

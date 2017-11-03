@@ -15,23 +15,18 @@ class CommentFilter(ContentFilter):
         super(CommentFilter, self).__init__(subreddit)
 
     def filter_golden_comments(self):
-        self.apply_rules(copy.copy(self.comments), [LongCommentRule, HighlyRatedCommentRule])
+        self.modify_content_by_rules(copy.copy(self.comments), [LongCommentRule, HighlyRatedCommentRule])
         self.filter_comments_to_indicative_words_post()
-        print(len(self.golden_content))
 
     def filter_comments_to_indicative_words_post(self):
-        golden_post_with_indicative_words = self.apply_rules(self.subreddit.new(limit=PrawConfig.POST_LIMIT),
+        golden_post_with_indicative_words = self.find_content_by_rules(self.subreddit.new(limit=PrawConfig.POST_LIMIT),
                                                              [AskingForHelpTitlePostRule])
         if golden_post_with_indicative_words is not None:
-            self.apply_rules(golden_post_with_indicative_words.reddit_content.comments,
-                             [CommentToIndicativeWordsInTitleRule])
+            comments = [post.reddit_content.comments for post in golden_post_with_indicative_words]
+            self.modify_content_by_rules(comments, [CommentToIndicativeWordsInTitleRule])
 
     def remove_spam_messages(self):
         for comment in copy.copy(self.comments):
             comment = SpanContentInCommentRule.execute_rule(comment)
             if comment is not None:  # Tagged as spam
                 self.comments.remove(comment)
-
-    def print_golden_comments(self):
-        for comment in self.golden_content:
-            print(PrawConfig.REDDIT_DOMAIN + comment.comment_link + " " + str(comment.votes))

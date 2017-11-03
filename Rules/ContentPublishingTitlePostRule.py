@@ -3,6 +3,7 @@ from Config.QualityThersholds import QualityThresholds
 from Models.RuleMatch import RuleMatch
 from Models.Post import Post
 
+
 class ContentPublishingTitlePostRule:
     description = "Indicative words for content publishing in title"
 
