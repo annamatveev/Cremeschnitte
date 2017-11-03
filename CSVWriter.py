@@ -1,6 +1,6 @@
 import csv
 import datetime
-
+from PrawConfig import PrawConfig
 
 class CSVWriter:
 
@@ -15,11 +15,11 @@ class CSVWriter:
 
             for post in golden_posts:
                 readable_time = datetime.datetime.fromtimestamp(post.publish_date).strftime('%H:%M:%S %d-%m-%Y ')
-                user_profile_link = 'http://www.reddit.com/user/' + post.user.fullname
+                user_profile_link = PrawConfig.REDDIT_USER_PROGILE_PREFIX + post.user.fullname
                 writer.writerow({'Username': user_profile_link,
                                  'Post/Comment Link': post.thread_link,
                                  'Post Title': post.title,
-                                 'Rule': post.rule,
+                                 'Rule': post.rule.description,
                                  'Post/Comment Upvotes': post.votes,
                                  'Date Created': readable_time,
                                  'Karma': post.user.karma,

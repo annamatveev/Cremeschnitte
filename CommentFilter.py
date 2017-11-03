@@ -4,11 +4,12 @@ from LongCommentRule import LongCommentRule
 from AskingForHelpTitlePostRule import AskingForHelpTitlePostRule
 from CommentToIndicativeWordsInTitleRule import CommentToIndicativeWordsInTitleRule
 from SpamContentInCommentRule import SpanContentInCommentRule
+from PrawConfig import PrawConfig
 
 
 class CommentFilter:
     def __init__(self, subreddit):
-        self.comments = subreddit.comments(limit=200)
+        self.comments = subreddit.comments(limit=500)
         self.subreddit = subreddit;
         self.golden_comments = []
 
@@ -36,7 +37,7 @@ class CommentFilter:
 
     def filter_comments_to_indicative_words_post(self):
         print("indicative words")
-        for reddit_post in copy.copy(self.subreddit.new(limit=50)):
+        for reddit_post in copy.copy(self.subreddit.new(limit=200)):
             golden_post_with_indicative_words = AskingForHelpTitlePostRule.execute_rule(reddit_post)
             if golden_post_with_indicative_words is not None:
                 for reddit_comment in golden_post_with_indicative_words.reddit_content.comments:
@@ -52,4 +53,4 @@ class CommentFilter:
 
     def print_golden_comments(self):
         for comment in self.golden_comments:
-            print("http://reddit.com/" + comment.comment_link + " " + str(comment.votes))
+            print(PrawConfig.REDDIT_DOMAIN + comment.comment_link + " " + str(comment.votes))

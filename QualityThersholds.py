@@ -1,10 +1,10 @@
 class QualityThresholds:
 
     # Comments
-    average_comment_upvotes = 1
-    average_comment_body_length = 100
-    high_rated_comment_upvotes = 15
-    long_comment_body_length = 200
+    average_comment_upvotes = 5
+    average_comment_body_length = 300
+    high_rated_comment_upvotes = 20
+    long_comment_body_length = 500
 
     # Posts
     average_post_upvotes = 10

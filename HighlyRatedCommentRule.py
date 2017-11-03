@@ -4,7 +4,7 @@ from RuleMatch import RuleMatch
 from QualityThersholds import QualityThresholds
 
 class HighlyRatedCommentRule:
-    description = "Long and highly rated comment"
+    description = "Highly rated comment"
 
     @staticmethod
     def execute_rule(reddit_comment):

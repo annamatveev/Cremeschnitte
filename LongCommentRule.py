@@ -5,7 +5,7 @@ from QualityThersholds import QualityThresholds
 
 
 class LongCommentRule:
-    description = "Long rated comment"
+    description = "Long comment"
 
     @staticmethod
     def execute_rule(reddit_comment):
