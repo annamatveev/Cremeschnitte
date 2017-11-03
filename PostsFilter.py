@@ -6,7 +6,7 @@ from ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
 class PostsFilter:
 
     def __init__(self, subreddit):
-        self.posts = subreddit.new(limit=50)
+        self.posts = subreddit.new(limit=5)
         self.golden_posts = []
 
     def filter_golden_posts(self):

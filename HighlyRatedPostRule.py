@@ -1,16 +1,14 @@
 from Post import Post
 from RuleMatch import RuleMatch
+from QualityThersholds import QualityThresholds
 
 
 class HighlyRatedPostRule:
     description = "Long and highly rated post"
-    upvotes_threshold = 25
-    description_length_threshold = 1000
 
     @staticmethod
     def execute_rule(reddit_post):
-        if len(reddit_post.selftext) > HighlyRatedPostRule.description_length_threshold \
-                and reddit_post.ups > HighlyRatedPostRule.upvotes_threshold:
+        if QualityThresholds.is_above_average_post(reddit_post):
             match = RuleMatch(HighlyRatedPostRule.description, HighlyRatedPostRule.calculate_score(reddit_post))
             golden_post = Post(reddit_post.selftext,
                                reddit_post.title,

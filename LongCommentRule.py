@@ -1,18 +1,16 @@
 from Comment import Comment
 import praw
 from RuleMatch import RuleMatch
+from QualityThersholds import QualityThresholds
 
 
 class LongCommentRule:
     description = "Long rated comment"
-    upvotes_threshold = 5
-    post_body_length_threshold = 1000
 
     @staticmethod
     def execute_rule(reddit_comment):
         if isinstance(reddit_comment, praw.models.Comment) \
-                and reddit_comment.score > LongCommentRule.upvotes_threshold \
-                and len(reddit_comment.body) > LongCommentRule.post_body_length_threshold:
+                and QualityThresholds.is_long_comment(reddit_comment):
             match = RuleMatch(LongCommentRule.description, LongCommentRule)
             golden_comment = Comment(reddit_comment.body,
                                      reddit_comment.submission.title,

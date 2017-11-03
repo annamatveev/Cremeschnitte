@@ -28,3 +28,4 @@ for golden_comment in comment_filter.golden_comments:
     golden_comment.user = golden_user
 
 writer.write_row(posts_filter.golden_posts)
+
