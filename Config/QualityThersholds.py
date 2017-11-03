@@ -35,7 +35,7 @@ class QualityThresholds:
     @staticmethod
     def is_above_average_post(post):
         return post.ups > QualityThresholds.average_post_upvotes \
-               and len(post.body) > QualityThresholds.average_post_body_length
+               and len(post.selftext) > QualityThresholds.average_post_body_length
 
     @staticmethod
     def is_above_average_comment(comment):
