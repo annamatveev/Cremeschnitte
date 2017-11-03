@@ -9,34 +9,30 @@ from Rules.CommentToIndicativeWordsInTitleRule import CommentToIndicativeWordsIn
 
 
 class CommentFilter:
+
     def __init__(self, subreddit):
         self.comments = subreddit.comments(limit=500)
         self.subreddit = subreddit;
         self.golden_comments = []
 
     def filter_golden_comments(self):
-        self.apply_comment_rules()
-        self.filter_high_rated_comments()
+        self.apply_rules(copy.copy(self.comments), [LongCommentRule, HighlyRatedCommentRule])
+        self.filter_comments_to_indicative_words_post()
         print(len(self.golden_comments))
 
-    def apply_comment_rules(self):
-        for reddit_comment in copy.copy(self.comments):
-            golden_comment = LongCommentRule.execute_rule(reddit_comment)
-            if golden_comment is not None and self.golden_comments.count(reddit_comment) == 0:
-                self.golden_comments.append(golden_comment)
-
-            golden_comment = HighlyRatedCommentRule.execute_rule(reddit_comment)
-            if golden_comment is not None and self.golden_comments.count(reddit_comment) == 0:
-                self.golden_comments.append(golden_comment)
+    def apply_rules(self, comments, rules_list):
+        for reddit_comment in comments:
+            for rule in rules_list:
+                golden_comment = rule.execute_rule(reddit_comment)
+                if golden_comment is not None and self.golden_comments.count(reddit_comment) == 0:
+                    self.golden_comments.append(golden_comment)
 
     def filter_comments_to_indicative_words_post(self):
         for reddit_post in copy.copy(self.subreddit.new(limit=200)):
             golden_post_with_indicative_words = AskingForHelpTitlePostRule.execute_rule(reddit_post)
             if golden_post_with_indicative_words is not None:
-                for reddit_comment in golden_post_with_indicative_words.reddit_content.comments:
-                    golden_comment = CommentToIndicativeWordsInTitleRule.execute_rule(reddit_comment)
-                    if golden_comment is not None and self.golden_comments.count(reddit_comment) == 0:
-                        self.golden_comments.append(golden_comment)
+                self.apply_rules(golden_post_with_indicative_words.reddit_content.comments,
+                                 [CommentToIndicativeWordsInTitleRule])
 
     def remove_spam_messages(self):
         for comment in copy.copy(self.comments):
