@@ -27,19 +27,31 @@ print(len(comment_filter.golden_content + posts_filter.golden_content))
 
 for golden_comment in comment_filter.golden_content:
     print(count)
-    if not any(content.user.fullname == golden_comment.user.name for content in
-               golden_content):  # User exists in other content
-        golden_user = users_filter.find_user_info(golden_comment.user, subreddit.display_name)
-        golden_comment.user = golden_user
+
+    # Find duplicates
+    dup = False
+    for unique_golden_comment in golden_content:
+        if unique_golden_comment.user.fullname == golden_comment.user.name:
+            unique_golden_comment.user.score += golden_comment.rule.score
+            dup = True
+    if not dup:
+        golden_comment.user = users_filter.find_user_info(golden_comment.user)
+        golden_comment.user.score = golden_comment.rule.score
         golden_content.append(golden_comment)
+
     count += 1
 
 for golden_post in posts_filter.golden_content:
     print(count)
-    if not any(content.user.fullname == golden_post.user.name for content in
-               golden_content): # User exists in other content
-        golden_user = users_filter.find_user_info(golden_post.user, subreddit.display_name)
-        golden_post.user = golden_user
+    # Find duplicates
+    dup = False
+    for unique_golden_post in golden_content:
+        if unique_golden_post.user.fullname == golden_post.user.name:
+            unique_golden_post.user.score += golden_post.rule.score
+            dup = True
+    if not dup:
+        golden_post.user = users_filter.find_user_info(golden_post.user)
+        golden_post.user.score = golden_post.rule.score
         golden_content.append(golden_post)
     count += 1
 

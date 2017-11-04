@@ -4,4 +4,6 @@ class User:
         self.karma = karma
         self.comments_num = comments_num
         self.posts_num = posts_num
+        self.score = 0
+
 
