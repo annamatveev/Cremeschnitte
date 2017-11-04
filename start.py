@@ -1,4 +1,5 @@
 import praw
+import time
 from CSVWriter import CSVWriter
 from Filters.PostsFilter import PostsFilter
 from Filters.UsersFilter import UsersFilter
@@ -27,7 +28,6 @@ print(len(comment_filter.golden_content + posts_filter.golden_content))
 
 for golden_comment in comment_filter.golden_content:
     print(count)
-
     # Find duplicates
     dup = False
     for unique_golden_comment in golden_content:
@@ -35,9 +35,12 @@ for golden_comment in comment_filter.golden_content:
             unique_golden_comment.user.score += golden_comment.rule.score
             dup = True
     if not dup:
-        golden_comment.user = users_filter.find_user_info(golden_comment.user)
-        golden_comment.user.score = golden_comment.rule.score
-        golden_content.append(golden_comment)
+        try:
+            golden_comment.user = users_filter.find_user_info(golden_comment.user)
+            golden_comment.user.score += golden_comment.rule.score
+            golden_content.append(golden_comment)
+        except:
+            print("403 Error")
 
     count += 1
 
@@ -50,9 +53,13 @@ for golden_post in posts_filter.golden_content:
             unique_golden_post.user.score += golden_post.rule.score
             dup = True
     if not dup:
-        golden_post.user = users_filter.find_user_info(golden_post.user)
-        golden_post.user.score = golden_post.rule.score
-        golden_content.append(golden_post)
+        try:
+            golden_post.user = users_filter.find_user_info(golden_post.user)
+            golden_post.user.score += golden_post.rule.score
+            golden_content.append(golden_post)
+        except:
+            print("403 Error")
+
     count += 1
 
 writer = CSVWriter()
