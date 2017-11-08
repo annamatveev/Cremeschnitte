@@ -20,7 +20,7 @@ class CommentFilter(ContentFilter):
 
     def filter_comments_to_indicative_words_post(self):
         golden_post_with_indicative_words = self.find_content_by_rules(self.subreddit.new(limit=PrawConfig.POST_LIMIT),
-                                                             [AskingForHelpTitlePostRule])
+                                                                       [AskingForHelpTitlePostRule])
         if golden_post_with_indicative_words is not None:
             posts_comments = [post.reddit_content.comments for post in golden_post_with_indicative_words
                         if len(post.reddit_content.comments) > 0]
