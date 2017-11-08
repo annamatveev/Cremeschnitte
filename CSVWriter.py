@@ -27,7 +27,7 @@ class CSVWriter:
 
             for content in golden_content:
                 readable_time = datetime.datetime.fromtimestamp(content.publish_date).strftime('%H:%M:%S %d-%m-%Y ')
-                user_profile_link = PrawConfig.REDDIT_USER_PROGILE_PREFIX + content.user.fullname
+                user_profile_link = PrawConfig.REDDIT_USER_PROFILE_PREFIX + content.user.fullname
                 writer.writerow({'Username': user_profile_link,
                                  'Post/Comment Link': content.thread_link,
                                  'Post Title': content.title,
