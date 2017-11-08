@@ -17,8 +17,10 @@ Python 3.6+
 
 ### Installing
 
+```
 git clone https://github.com/annamatveev/Cremeschnitte.git
 python start.py
+```
 
 the output file will be in a CSV file called golden_redditors.csv
 
