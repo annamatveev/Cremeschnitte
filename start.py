@@ -1,8 +1,9 @@
+from Resources.DB.MongoDBWriter import MongoDBWriter
 from Filters.CommentFilter import CommentFilter
 from Filters.ContentFilter import ContentFilter
 from Filters.PostsFilter import PostsFilter
+from Resources.CSVWriter import CSVWriter
 from Config.PrawConfig import PrawConfig
-from CSVWriter import CSVWriter
 import praw
 
 
@@ -29,5 +30,6 @@ posts_filter.filter_golden_posts()
 ContentFilter.resolve_duplicates(comment_filter.golden_content, golden_content)
 ContentFilter.resolve_duplicates(posts_filter.golden_content, golden_content)
 
-writer = CSVWriter()
+writer = MongoDBWriter()
+writer.connect()
 writer.write_row(golden_content)

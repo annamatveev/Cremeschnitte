@@ -1,5 +1,5 @@
 class PrawConfig:
-    REDDIT_USER_PROGILE_PREFIX = 'https://www.reddit.com/user/'
+    REDDIT_USER_PROFILE_PREFIX = 'https://www.reddit.com/user/'
     REDDIT_DOMAIN = 'http://www.reddit.com'
     SUBREDDIT = 'OverwatchUniversity'
     USERS_NEW_COMMENTS_LIMIT = 50
