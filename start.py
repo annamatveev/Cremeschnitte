@@ -4,6 +4,7 @@ from Filters.ContentFilter import ContentFilter
 from Filters.PostsFilter import PostsFilter
 from Resources.CSVWriter import CSVWriter
 from Config.PrawConfig import PrawConfig
+import datetime
 import praw
 
 
@@ -32,4 +33,20 @@ ContentFilter.resolve_duplicates(posts_filter.golden_content, golden_content)
 
 writer = MongoDBWriter()
 writer.connect()
-writer.write_row(golden_content)
+
+for content in golden_content:
+    readable_time = datetime.datetime.fromtimestamp(content.publish_date)
+    user_profile_link = PrawConfig.REDDIT_USER_PROFILE_PREFIX + content.user.fullname
+    writer.write_row(user_profile_link,
+                     content.thread_link,
+                     content.rule.description,
+                     content.title,
+                     content.votes,
+                     readable_time,
+                     content.rule.score,
+                     content.user.score,
+                     content.user.karma,
+                     content.user.comments_num,
+                     content.user.posts_num)
+
+
