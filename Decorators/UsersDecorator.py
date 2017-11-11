@@ -3,10 +3,10 @@ from Models.User import User
 import praw
 
 
-class UsersFilter:
+class UsersDecorator:
 
     @staticmethod
-    def find_user_info(reddit_user):
+    def amend_user_details(reddit_user):
         comments_counter = 0
         posts_counter = 0
 

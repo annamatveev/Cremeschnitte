@@ -1,9 +1,10 @@
 from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
 from Config.QualityThersholds import QualityThresholds
+from Decorators.UsersDecorator import UsersDecorator
 from Models.RuleMatch import RuleMatch
+from Models.Activity import Activity
 from Models.Lead import Lead
 from Models.User import User
-from Models.Activity import Activity
 
 
 class ContentPublishingTitlePostRule:
@@ -28,6 +29,7 @@ class ContentPublishingTitlePostRule:
                                    reddit_post.created,
                                    match,
                                    reddit_post)
-            user = User(reddit_post.author.name)
+
+            user = UsersDecorator.amend_user_details(reddit_post.author)
             lead = Lead(golden_post, user)
             return lead

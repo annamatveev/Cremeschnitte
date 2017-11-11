@@ -7,6 +7,8 @@ from Filters.ContentFilter import ContentFilter
 from Config.PrawConfig import PrawConfig
 import copy
 
+# TODO: make static
+
 
 class CommentFilter(ContentFilter):
 

@@ -1,7 +1,8 @@
 from Config.QualityThersholds import QualityThresholds
-from Models.Lead import Lead
+from Decorators.UsersDecorator import UsersDecorator
 from Models.RuleMatch import RuleMatch
 from Models.Activity import Activity
+from Models.Lead import Lead
 from Models.User import User
 import praw
 
@@ -23,6 +24,7 @@ class HighlyRatedCommentRule:
                                       reddit_comment.created,
                                       match,
                                       reddit_comment)
-            user = User(reddit_comment.author.name)
+
+            user = UsersDecorator.amend_user_details(reddit_comment.author)
             lead = Lead(golden_comment, user)
             return lead

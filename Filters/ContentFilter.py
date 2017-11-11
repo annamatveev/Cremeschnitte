@@ -1,4 +1,6 @@
-from Filters.UsersFilter import UsersFilter
+from Decorators.UsersDecorator import UsersDecorator
+
+# TODO: make static
 
 
 class ContentFilter:
@@ -31,7 +33,7 @@ class ContentFilter:
 
             if not is_dup:
                 reddit_user = reddit.redditor(lead.activity.username)
-                lead.user = UsersFilter.find_user_info(reddit_user)
+                lead.user = UsersDecorator.amend_user_details(reddit_user)
                 lead.user.score += lead.activity.match.score
                 unique_leads_so_far.append(lead)
 
