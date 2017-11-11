@@ -1,7 +1,9 @@
 from Config.IndicativeWordsDictionary import IndicativeWordsDictionary
-from Models.RuleMatch import RuleMatch
-from Models.Post import Post
 from Config.QualityThersholds import QualityThresholds
+from Models.Lead import Lead
+from Models.RuleMatch import RuleMatch
+from Models.User import User
+from Models.Activity import Activity
 
 
 class AskingForHelpTitlePostRule:
@@ -23,12 +25,14 @@ class AskingForHelpTitlePostRule:
         if len(guide_words_found) > 0 and len(asking_help_words_found) > 0:
             match = RuleMatch(AskingForHelpTitlePostRule.description + ': ' + ', '.join(guide_words_found),
                               QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
-            golden_post = Post(reddit_post.selftext,
-                               reddit_post.title,
-                               reddit_post.ups,
-                               reddit_post.shortlink,
-                               reddit_post.author,
-                               reddit_post.created,
-                               match,
-                               reddit_post)
-            return golden_post
+            golden_post = Activity(reddit_post.selftext,
+                                   reddit_post.title,
+                                   reddit_post.ups,
+                                   reddit_post.shortlink,
+                                   reddit_post.author.name,
+                                   reddit_post.created,
+                                   match,
+                                   reddit_post)
+            user = User(reddit_post.author.name)
+            lead = Lead(golden_post, user)
+            return lead

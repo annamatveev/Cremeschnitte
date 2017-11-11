@@ -6,13 +6,14 @@ class ContentFilter:
         self.golden_content = []
         self.subreddit = subreddit
 
-    def find_content_by_rules(self, contents, rules_list):
+    @staticmethod
+    def find_content_by_rules(contents, rules_list):
         golden_contents = []
         for content in contents:
             for rule in rules_list:
-                golden_content = rule.execute_rule(content)
-                if golden_content is not None and self.golden_content.count(content) == 0:
-                    golden_contents.append(golden_content)
+                lead = rule.execute_rule(content)
+                if lead is not None:
+                    golden_contents.append(lead)
         return golden_contents
 
     def modify_content_by_rules(self, contents, rules_list):
@@ -20,21 +21,18 @@ class ContentFilter:
         self.golden_content += golden_content
 
     @staticmethod
-    def resolve_duplicates(golden_content_unique_type, golden_content_unique_users):
-        print(len(golden_content_unique_users))
-        for golden_content in golden_content_unique_type:
+    def resolve_duplicates(leads, unique_leads_so_far, reddit):
+        for lead in leads:
             is_dup = False
-            for original_golden_content in golden_content_unique_users:
-                if original_golden_content.user.fullname == golden_content.user.name:
-                    original_golden_content.user.score += golden_content.rule.score
-                    is_dup = True
+            for leads_so_far in unique_leads_so_far:
+                if leads_so_far.user.username == lead.activity.username:
+                    leads_so_far.user.score += lead.activity.match.score
+                    # is_dup = True
 
             if not is_dup:
-                try:
-                    golden_content.user = UsersFilter.find_user_info(golden_content.user)
-                    golden_content.user.score += golden_content.rule.score
-                    golden_content_unique_users.append(golden_content)
-                except:
-                    pass
+                reddit_user = reddit.redditor(lead.activity.username)
+                lead.user = UsersFilter.find_user_info(reddit_user)
+                lead.user.score += lead.activity.match.score
+                unique_leads_so_far.append(lead)
 
-        return golden_content_unique_users
+        return unique_leads_so_far
