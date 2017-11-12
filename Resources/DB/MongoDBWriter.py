@@ -11,7 +11,7 @@ class MongoDBWriter:
     @staticmethod
     def connect():
 
-        connect(host='mongodb://' + DBConfig.USER + ':' + DBConfig.PASSWORD + '@<host>')
+        connect(host=DBConfig.HOST)
 
     @staticmethod
     def add_lead(lead):
