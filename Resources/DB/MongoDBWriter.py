@@ -25,7 +25,7 @@ class MongoDBWriter:
         user_db_object = User(reddit_id=lead.activity.reddit_id,
                               username=lead.user.username,
                               karma=lead.user.karma,
-                              score=lead.user.score,
+                              score=lead.activity.match.score,
                               relevant_comments=lead.user.relevant_comments,
                               relevant_posts=lead.user.relevant_posts)
         lead_db_object = Lead(username=lead.user.username,
@@ -61,4 +61,5 @@ class MongoDBWriter:
                                       score=lead.activity.match.score,
                                       date_created=datetime.datetime.fromtimestamp(lead.activity.publish_date))
         Lead.objects(username=lead.user.username).update(push__activity=activity_db_object)
+        Lead.objects(username=lead.user.username).update(user__score=lead.user.score+lead.activity.match.score)
         Lead.objects(username=lead.user.username).update(date_updated=datetime.datetime.utcnow)
