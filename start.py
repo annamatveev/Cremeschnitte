@@ -21,24 +21,20 @@ reddit = initialize_reddit_connection()
 
 subreddit = reddit.subreddit(PrawConfig.SUBREDDIT)
 
-golden_content = []
-
 comment_filter = CommentFilter(subreddit)
 comment_filter.filter_golden_comments()
 
 posts_filter = PostsFilter(subreddit)
 posts_filter.filter_golden_posts()
 
-ContentFilter.resolve_duplicates(comment_filter.golden_content, golden_content, reddit)
-ContentFilter.resolve_duplicates(posts_filter.golden_content, golden_content, reddit)
+leads = posts_filter.leads + comment_filter.leads
 
 writer = MongoDBWriter()
 writer.connect()
 
-for lead in golden_content:
-    readable_time = datetime.datetime.fromtimestamp(lead.activity.publish_date)
-    user_profile_link = PrawConfig.REDDIT_USER_PROFILE_PREFIX + lead.activity.username
-    if not MongoDBWriter.is_user_exists(user_profile_link):
-        writer.add_user(lead.activity, lead.user)
+for lead in leads:
+    if not MongoDBWriter.does_user_exist(lead.user):
+        writer.add_lead(lead)
     else:
-        writer.add_user_content(user_profile_link, lead.content)
+        if not MongoDBWriter.does_lead_exist(lead):
+            writer.add_lead_to_user(lead)

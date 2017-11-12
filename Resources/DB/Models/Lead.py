@@ -9,3 +9,4 @@ class Lead(Document):
     activity = ListField(EmbeddedDocumentField(Activity))
     user = EmbeddedDocumentField(User)
     date_inserted = DateTimeField(default=datetime.datetime.utcnow)
+    date_updated = DateTimeField(default=datetime.datetime.utcnow)
