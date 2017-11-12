@@ -2,6 +2,7 @@ from mongoengine import *
 
 
 class Activity(EmbeddedDocument):
+    reddit_id = StringField(required=True, max_length=50)
     username = StringField(required=True, max_length=50)
     link = StringField(required=True, max_length=200)
     title = StringField(required=True, max_length=300)

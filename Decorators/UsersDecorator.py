@@ -21,5 +21,5 @@ class UsersDecorator:
             if reddit_post.subreddit.display_name == PrawConfig.SUBREDDIT:
                 posts_counter += 1
 
-        user = User(reddit_user.name, reddit_user.link_karma, comments_counter, posts_counter)
+        user = User(reddit_user.id, reddit_user.name, reddit_user.link_karma, comments_counter, posts_counter)
         return user

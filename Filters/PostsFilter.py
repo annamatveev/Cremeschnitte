@@ -1,7 +1,7 @@
-from Config.PrawConfig import PrawConfig
 from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
-from Rules.Pipe import Pipe
 from Rules.HighlyRatedPostRule import HighlyRatedPostRule
+from Config.PrawConfig import PrawConfig
+from Rules.Pipe import Pipe
 
 
 # TODO: make static

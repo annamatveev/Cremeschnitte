@@ -13,7 +13,8 @@ class HighlyRatedPostRule:
         if QualityThresholds.is_above_average_post(reddit_post):
             match = RuleMatch(HighlyRatedPostRule.description,
                               QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
-            golden_post = Activity(reddit_post.selftext,
+            golden_post = Activity(reddit_post.id,
+                                   reddit_post.selftext,
                                    reddit_post.title,
                                    reddit_post.ups,
                                    reddit_post.shortlink,

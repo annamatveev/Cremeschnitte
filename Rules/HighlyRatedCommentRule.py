@@ -3,7 +3,6 @@ from Decorators.UsersDecorator import UsersDecorator
 from Models.RuleMatch import RuleMatch
 from Models.Activity import Activity
 from Models.Lead import Lead
-from Models.User import User
 import praw
 
 
@@ -16,7 +15,8 @@ class HighlyRatedCommentRule:
                 and QualityThresholds.is_high_rated_comment(reddit_comment):
             match = RuleMatch(HighlyRatedCommentRule.description,
                               QualityThresholds.content_quality_score(reddit_comment.body, reddit_comment.ups))
-            golden_comment = Activity(reddit_comment.body,
+            golden_comment = Activity(reddit_comment.id,
+                                      reddit_comment.body,
                                       reddit_comment.submission.title,
                                       reddit_comment.ups,
                                       reddit_comment.permalink,

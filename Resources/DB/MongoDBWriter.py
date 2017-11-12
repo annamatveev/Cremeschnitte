@@ -13,7 +13,8 @@ class MongoDBWriter:
 
     @staticmethod
     def add_lead(lead):
-        activity_db_object = Activity(username=lead.activity.username,
+        activity_db_object = Activity(reddit_id=lead.activity.reddit_id,
+                                      username=lead.activity.username,
                                       link=lead.activity.link,
                                       title=lead.activity.title,
                                       body=lead.activity.body,
@@ -21,7 +22,8 @@ class MongoDBWriter:
                                       match=lead.activity.match.description,
                                       score=lead.activity.match.score,
                                       date_created=datetime.datetime.fromtimestamp(lead.activity.publish_date))
-        user_db_object = User(username=lead.user.username,
+        user_db_object = User(reddit_id=lead.activity.reddit_id,
+                              username=lead.user.username,
                               karma=lead.user.karma,
                               score=lead.user.score,
                               relevant_comments=lead.user.relevant_comments,
@@ -49,7 +51,8 @@ class MongoDBWriter:
 
     @staticmethod
     def add_lead_to_user(lead):
-        activity_db_object = Activity(username=lead.activity.username,
+        activity_db_object = Activity(reddit_id=lead.activity.reddit_id,
+                                      username=lead.activity.username,
                                       link=lead.activity.link,
                                       title=lead.activity.title,
                                       body=lead.activity.body,

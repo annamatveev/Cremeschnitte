@@ -4,7 +4,6 @@ from Decorators.UsersDecorator import UsersDecorator
 from Models.RuleMatch import RuleMatch
 from Models.Activity import Activity
 from Models.Lead import Lead
-from Models.User import User
 
 
 class ContentPublishingTitlePostRule:
@@ -21,7 +20,8 @@ class ContentPublishingTitlePostRule:
                 and QualityThresholds.is_above_average_post(reddit_post):
             match = RuleMatch(ContentPublishingTitlePostRule.description + ': ' + ', '.join(content_words_found),
                               QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
-            golden_post = Activity(reddit_post.selftext,
+            golden_post = Activity(reddit_post.id,
+                                   reddit_post.selftext,
                                    reddit_post.title,
                                    reddit_post.ups,
                                    reddit_post.shortlink,
