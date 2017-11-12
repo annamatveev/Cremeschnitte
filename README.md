@@ -25,7 +25,7 @@ import mongoengine
 ```
 Or
 ```
-pip install REQUIREMENTS.pip
+pip install requiremets.txt
 ```
 And then -
 ```
