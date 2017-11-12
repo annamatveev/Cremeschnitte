@@ -4,6 +4,7 @@ from Filters.PostsFilter import PostsFilter
 from Config.PrawConfig import PrawConfig
 import praw
 
+print("Server starting...")
 
 r = praw.Reddit(client_id=PrawConfig.client_id,
                 client_secret=PrawConfig.client_secret,
