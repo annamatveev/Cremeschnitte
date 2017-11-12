@@ -1,5 +1,5 @@
 class User:
-    def __init__(self, username, karma=None, relevant_comments=None, relevant_posts=None):
+    def __init__(self, username, karma, relevant_comments, relevant_posts):
         self.username = username
         self.karma = karma
         self.score = 0

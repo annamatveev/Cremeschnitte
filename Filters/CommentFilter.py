@@ -1,36 +1,27 @@
-from Rules.CommentToIndicativeWordsInTitleRule import CommentToIndicativeWordsInTitleRule
+from Config.PrawConfig import PrawConfig
 from Rules.AskingForHelpTitlePostRule import AskingForHelpTitlePostRule
-from Rules.SpamContentInCommentRule import SpanContentInCommentRule
+from Rules.CommentToIndicativeWordsInTitleRule import CommentToIndicativeWordsInTitleRule
+from Rules.Pipe import Pipe
 from Rules.HighlyRatedCommentRule import HighlyRatedCommentRule
 from Rules.LongCommentRule import LongCommentRule
-from Filters.ContentFilter import ContentFilter
-from Config.PrawConfig import PrawConfig
-import copy
-
-# TODO: make static
 
 
-class CommentFilter(ContentFilter):
+class CommentFilter:
 
-    def __init__(self, subreddit):
-        self.comments = subreddit.comments(limit=PrawConfig.COMMENT_LIMIT)
-        super(CommentFilter, self).__init__(subreddit)
+    @staticmethod
+    def filter_leads(subreddit):
+        return Pipe.run(subreddit.comments(limit=PrawConfig.COMMENT_LIMIT),
+                        [LongCommentRule, HighlyRatedCommentRule]) \
+               + CommentFilter.filter_comment_leads_in_indicative_words_post(subreddit)
 
-    def filter_golden_comments(self):
-        self.modify_content_by_rules(copy.copy(self.comments), [LongCommentRule, HighlyRatedCommentRule])
-        self.filter_comments_to_indicative_words_post()
-
-    def filter_comments_to_indicative_words_post(self):
-        leads_with_indicative_words = self.find_content_by_rules(self.subreddit.new(limit=PrawConfig.POST_LIMIT),
-                                                                  [AskingForHelpTitlePostRule])
-        if leads_with_indicative_words is not None:
-            posts_comments = [lead.activity.reddit_content.comments for lead in
-                              leads_with_indicative_words if len(lead.activity.reddit_content.comments) > 0]
-            for comment_thread in posts_comments:
-                self.modify_content_by_rules(comment_thread, [CommentToIndicativeWordsInTitleRule])
-
-    def remove_spam_messages(self):
-        for comment in copy.copy(self.comments):
-            comment = SpanContentInCommentRule.execute_rule(comment)
-            if comment is not None:  # Tagged as spam
-                self.comments.remove(comment)
+    @staticmethod
+    def filter_comment_leads_in_indicative_words_post(subreddit):
+        leads = []
+        post_leads_with_indicative_words = Pipe.run(subreddit.new(limit=PrawConfig.POST_LIMIT),
+                                                                          [AskingForHelpTitlePostRule])
+        if post_leads_with_indicative_words is not None:
+            comments_on_posts = [lead.activity.reddit_content.comments for lead in
+                                 post_leads_with_indicative_words if len(lead.activity.reddit_content.comments) > 0]
+            for comment_thread in comments_on_posts:
+                leads += Pipe.run(comment_thread, [CommentToIndicativeWordsInTitleRule])
+        return leads

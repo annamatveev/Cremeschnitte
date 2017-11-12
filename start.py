@@ -1,10 +1,9 @@
-from Resources.DB.MongoDBWriter import MongoDBWriter
-from Filters.CommentFilter import CommentFilter
-from Filters.ContentFilter import ContentFilter
-from Filters.PostsFilter import PostsFilter
-from Config.PrawConfig import PrawConfig
-import datetime
 import praw
+
+from Config.PrawConfig import PrawConfig
+from Filters.CommentFilter import CommentFilter
+from Filters.PostsFilter import PostsFilter
+from Resources.DB.MongoDBWriter import MongoDBWriter
 
 
 def initialize_reddit_connection():
@@ -21,13 +20,7 @@ reddit = initialize_reddit_connection()
 
 subreddit = reddit.subreddit(PrawConfig.SUBREDDIT)
 
-comment_filter = CommentFilter(subreddit)
-comment_filter.filter_golden_comments()
-
-posts_filter = PostsFilter(subreddit)
-posts_filter.filter_golden_posts()
-
-leads = posts_filter.leads + comment_filter.leads
+leads = CommentFilter.filter_leads(subreddit) + PostsFilter.filter_leads(subreddit)
 
 writer = MongoDBWriter()
 writer.connect()

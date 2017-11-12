@@ -1,17 +1,15 @@
-from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
-from Rules.HighlyRatedPostRule import HighlyRatedPostRule
-from Filters.ContentFilter import ContentFilter
 from Config.PrawConfig import PrawConfig
-import copy
+from Rules.ContentPublishingTitlePostRule import ContentPublishingTitlePostRule
+from Rules.Pipe import Pipe
+from Rules.HighlyRatedPostRule import HighlyRatedPostRule
+
 
 # TODO: make static
 
 
-class PostsFilter(ContentFilter):
+class PostsFilter:
 
-    def __init__(self, subreddit):
-        self.posts = subreddit.new(limit=PrawConfig.POST_LIMIT)
-        super(PostsFilter, self).__init__(subreddit)
-
-    def filter_golden_posts(self):
-        self.modify_content_by_rules(copy.copy(self.posts), [HighlyRatedPostRule, ContentPublishingTitlePostRule])
+    @staticmethod
+    def filter_leads(subreddit):
+        return Pipe.run(subreddit.new(limit=PrawConfig.COMMENT_LIMIT),
+                        [HighlyRatedPostRule, ContentPublishingTitlePostRule])
