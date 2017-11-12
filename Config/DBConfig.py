@@ -1,0 +1,3 @@
+class DBConfig:
+    USER = ''
+    PASSWORD = ''

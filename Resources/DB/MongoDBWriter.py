@@ -1,6 +1,7 @@
 from Resources.DB.Models.Activity import Activity
 from Resources.DB.Models.Lead import Lead
 from Resources.DB.Models.User import User
+from Config.DBConfig import DBConfig
 from mongoengine import *
 import datetime
 
@@ -9,7 +10,8 @@ class MongoDBWriter:
 
     @staticmethod
     def connect():
-        connect('cremeschnitte')
+
+        connect(host='mongodb://' + DBConfig.USER + ':' + DBConfig.PASSWORD + '@<host>')
 
     @staticmethod
     def add_lead(lead):
