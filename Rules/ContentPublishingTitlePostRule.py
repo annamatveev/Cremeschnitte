@@ -7,7 +7,7 @@ from Models.Lead import Lead
 
 
 class ContentPublishingTitlePostRule:
-    description = "Indicative words for content publishing in title"
+    description = "Posted a post with indicative words in title"
 
     @staticmethod
     def execute_rule(reddit_post):

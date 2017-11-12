@@ -7,7 +7,7 @@ from Models.Lead import Lead
 
 
 class AskingForHelpTitlePostRule:
-    description = "Indicative words in title that ask for help"
+    description = "Posted a post with indicative words in title"
 
     @staticmethod
     def execute_rule(reddit_post):
@@ -18,9 +18,9 @@ class AskingForHelpTitlePostRule:
             flair = reddit_post.link_flair_text.lower()
 
         guide_words_found = [word for word in IndicativeWordsDictionary.GUIDE_CONTENT
-                            if (word in title or word in flair)]
+                             if (word in title or word in flair)]
         asking_help_words_found = [word for word in IndicativeWordsDictionary.ASKING_FOR_HELP
-                           if (word in title or word in flair)]
+                                   if (word in title or word in flair)]
 
         if len(guide_words_found) > 0 and len(asking_help_words_found) > 0:
             match = RuleMatch(AskingForHelpTitlePostRule.description + ': ' + ', '.join(guide_words_found),

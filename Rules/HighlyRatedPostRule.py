@@ -6,7 +6,7 @@ from Models.Lead import Lead
 
 
 class HighlyRatedPostRule:
-    description = "Long and highly rated post"
+    description = "Posted highly rated post"
 
     @staticmethod
     def execute_rule(reddit_post):

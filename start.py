@@ -5,20 +5,13 @@ from Filters.CommentFilter import CommentFilter
 from Filters.PostsFilter import PostsFilter
 from Resources.DB.MongoDBWriter import MongoDBWriter
 
+r = praw.Reddit(client_id=PrawConfig.client_id,
+                client_secret=PrawConfig.client_secret,
+                password=PrawConfig.password,
+                user_agent=PrawConfig.user_agent,
+                username=PrawConfig.username)
 
-def initialize_reddit_connection():
-    r = praw.Reddit(client_id=PrawConfig.client_id,
-                    client_secret=PrawConfig.client_secret,
-                    password=PrawConfig.password,
-                    user_agent=PrawConfig.user_agent,
-                    username=PrawConfig.username)
-
-    return r
-
-
-reddit = initialize_reddit_connection()
-
-subreddit = reddit.subreddit(PrawConfig.SUBREDDIT)
+subreddit = r.subreddit(PrawConfig.SUBREDDIT)
 
 leads = CommentFilter.filter_leads(subreddit) + PostsFilter.filter_leads(subreddit)
 

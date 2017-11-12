@@ -7,7 +7,7 @@ import praw
 
 
 class CommentToIndicativeWordsInTitleRule:
-    description = "Highly rated comment to indicative words in title"
+    description = "Posted a long or highly rated comment to a post with indicative words in title"
 
     @staticmethod
     def execute_rule(reddit_comment):

@@ -7,7 +7,7 @@ import praw
 
 
 class HighlyRatedCommentRule:
-    description = "Highly rated comment"
+    description = "Posted highly rated comment"
 
     @staticmethod
     def execute_rule(reddit_comment):

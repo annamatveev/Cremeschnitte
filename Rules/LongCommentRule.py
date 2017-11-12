@@ -6,7 +6,7 @@ from Models.Lead import Lead
 
 
 class LongCommentRule:
-    description = "Long comment"
+    description = "Posted a long comment"
 
     @staticmethod
     def execute_rule(reddit_comment):
