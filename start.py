@@ -1,9 +1,9 @@
-import praw
-
-from Config.PrawConfig import PrawConfig
+from Resources.DB.MongoDBWriter import MongoDBWriter
 from Filters.CommentFilter import CommentFilter
 from Filters.PostsFilter import PostsFilter
-from Resources.DB.MongoDBWriter import MongoDBWriter
+from Config.PrawConfig import PrawConfig
+import praw
+
 
 r = praw.Reddit(client_id=PrawConfig.client_id,
                 client_secret=PrawConfig.client_secret,

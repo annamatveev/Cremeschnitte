@@ -11,22 +11,32 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 ```
-GIT
+git
 Python 3.6+
+MongoDB
 ```
 
 ### Installing
 
 ```
 git clone https://github.com/annamatveev/Cremeschnitte.git
+import praw
+import mongoengine
+```
+Or
+```
+pip install REQUIREMENTS.pip
+```
+And then -
+```
 python start.py
 ```
 
-the output file will be in a CSV file called golden_redditors.csv
 
 ## Built With
 
-* [Praw](http://praw.readthedocs.io/en/latest/) -  The Python Reddit API Wrapper
+* [PRAW](http://praw.readthedocs.io/en/latest/) -  The Python Reddit API Wrapper
+* [mongoengine](http://mongoengine.org/) -  Document Object Mapper for working with MongoDB from Python
 
 ## Contributing
 
