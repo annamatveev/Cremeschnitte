@@ -1,4 +1,2 @@
 praw
 mongoengine
-
-[-e] git+https://github.com/annamatveev/Cremeschnitte.git

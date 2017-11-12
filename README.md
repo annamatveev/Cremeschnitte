@@ -25,11 +25,11 @@ import mongoengine
 ```
 Or
 ```
-pip install requiremets.txt
+pip install requirements.txt
 ```
 And then -
 ```
-python start.py
+python manage.py
 ```
 
 
