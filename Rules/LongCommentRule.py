@@ -13,8 +13,6 @@ class LongCommentRule:
         if QualityThresholds.is_long_comment(reddit_comment):
             match = RuleMatch(LongCommentRule.description,
                               QualityThresholds.content_quality_score(reddit_comment.body, reddit_comment.ups))
-            if reddit_comment.author is None:  # User was deleted
-                return
             golden_comment = Activity(reddit_comment.id,
                                       reddit_comment.body,
                                       reddit_comment.submission.title,
