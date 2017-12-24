@@ -14,7 +14,7 @@ class HighlyRatedPostRule:
             match = RuleMatch(HighlyRatedPostRule.description,
                               QualityThresholds.content_quality_score(reddit_post.selftext, reddit_post.ups))
             if reddit_post.author is None:  # User was deleted
-                return;
+                return
             golden_post = Activity(reddit_post.id,
                                    reddit_post.selftext,
                                    reddit_post.title,
